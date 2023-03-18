@@ -22,6 +22,8 @@ public class AServlet implements Servlet {
     public void init(ServletConfig servletConfig) throws ServletException {
         System.out.println("AServlet's init method execute!");
     }
+    // init方法在创建的时候只被调用一次，而且程序员没有权限进行调用
+    // init方法在执行的时候，AServlet已经被创建出来了
 
     @Override
     public ServletConfig getServletConfig() {
@@ -31,11 +33,13 @@ public class AServlet implements Servlet {
     public AServlet() {
         System.out.println("AServlet实例化了！");
     }
+    // 构造方法也是对象创建的时候只执行一次，这个是由tomcat服务器创建的
 
     @Override
     public void service(ServletRequest request, ServletResponse response) throws ServletException, IOException {
         System.out.println("AServlet's service method execute!");
     }
+    // service方法是用户请求一次，程序就执行一次
 
     @Override
     public String getServletInfo() {
@@ -46,4 +50,5 @@ public class AServlet implements Servlet {
     public void destroy() {
         System.out.println("AServlet's destroy method execute!");
     }
+    // destroy方法是服务器关闭，程序销毁的时候执行的
 }
