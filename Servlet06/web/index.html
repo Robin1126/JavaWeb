@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>http协议</title>
+</head>
+<body>
+<h1>请求get：</h1>
+<!--浏览器上带的路径还是要有根路径-->
+<form action="/Servlet06/gServlet" method = "get">
+  <input type = "text" name = "username" />
+  <input type = "text" name = "password" />
+    <input type = "submit" value="login" >
+</form>
+<h1>请求post：</h1>
+<form action="/Servlet06/pServlet" method = "post">
+    <input type = "text" name = "username" />
+    <input type = "text" name = "password" />
+    <input type = "submit" value="login" >
+</form>
+</body>
+</html>
