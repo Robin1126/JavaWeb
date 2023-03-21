@@ -30,7 +30,7 @@ import java.util.Enumeration;
         一份servlet包含一个config对象
         其实就是xml文件中servlet标签中的配置信息
 
-    6. ServletConfig接口
+    6. ServletConfig接口, 每个Servlet对应自己的Servlet对象，100个servlet对应100个servlet对象
 
     7. GenericServlet自带方法可以调用对象
 
