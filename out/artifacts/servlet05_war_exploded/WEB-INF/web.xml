@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+         version="6.0">
+
+    <!--配置servletContext信息,这里的信息是全局的，所有servlet都能使用-->
+    <context-param>
+        <param-name>pageSize</param-name>
+        <param-value>10</param-value>
+    </context-param>
+    <context-param>
+        <param-name>startIndex</param-name>
+        <param-value>0</param-value>
+    </context-param>
+
+    <!--以下的信息是单独的servlet使用的-->
+    <servlet>
+        <servlet-name>aservlet</servlet-name>
+        <servlet-class>de.tu_ilmenau.javaweb.servlet.AServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>aservlet</servlet-name>
+        <url-pattern>/a</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>bservlet</servlet-name>
+        <servlet-class>de.tu_ilmenau.javaweb.servlet.BServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>bservlet</servlet-name>
+        <url-pattern>/b</url-pattern>
+    </servlet-mapping>
+</web-app>

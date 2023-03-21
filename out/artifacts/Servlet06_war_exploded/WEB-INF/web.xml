@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+         version="6.0">
+    <servlet>
+        <servlet-name>GetServlet</servlet-name>
+        <servlet-class>de.tu_ilmenau.javaweb.Servlet.GetServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GetServlet</servlet-name>
+        <url-pattern>/gServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>postServlet</servlet-name>
+        <servlet-class>de.tu_ilmenau.javaweb.Servlet.PostServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>postServlet</servlet-name>
+        <url-pattern>/pServlet</url-pattern>
+    </servlet-mapping>
+</web-app>
