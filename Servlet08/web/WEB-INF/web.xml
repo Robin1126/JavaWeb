@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+         version="6.0">
+    <!--<welcome-file-list>
+&lt;!&ndash;        这里不需要加上/    &ndash;&gt;
+        <welcome-file>Welcomepage.html</welcome-file>
+        &lt;!&ndash;如果在webapp的根目录下新建别的路径就要加上/ 比如 page1/page2/page.html&ndash;&gt;
+&lt;!&ndash;        welcome是可以设置多个欢迎页面的，越靠上的优先级越高，找不到才往下走&ndash;&gt;
+        &lt;!&ndash;默认是去找web文件夹下的index.html就会默认作为欢迎页面&ndash;&gt;
+    </welcome-file-list>-->
+
+    <servlet>
+        <servlet-name>Welcome</servlet-name>
+        <servlet-class>WelcomeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Welcome</servlet-name>
+        <url-pattern>/welcome</url-pattern>
+    </servlet-mapping>
+    
+    <welcome-file-list>
+        <welcome-file>welcome</welcome-file>
+<!--        这里不用加/从而将这变成一个默认的欢迎路径-->
+    </welcome-file-list>
+</web-app>
