@@ -13,6 +13,8 @@ import java.io.PrintWriter;
 public class WelcomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // request是Tomcat服务器给实现和创建出来的
+
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
