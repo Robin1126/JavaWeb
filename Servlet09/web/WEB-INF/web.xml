@@ -20,4 +20,33 @@
         <servlet-name>register</servlet-name>
         <url-pattern>/userReg</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>A</servlet-name>
+        <servlet-class>de.tu_ilmenau.javaweb.servlet.AServletTime</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>A</servlet-name>
+        <url-pattern>/a</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>B</servlet-name>
+        <servlet-class>de.tu_ilmenau.javaweb.servlet.BServletTime</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>B</servlet-name>
+        <url-pattern>/b</url-pattern>
+    </servlet-mapping>
+
+  <!--  <servlet>
+        <servlet-name>test</servlet-name>
+        <servlet-class></servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>test</servlet-name>
+        <url-pattern>/test</url-pattern>
+    </servlet-mapping>-->
 </web-app>

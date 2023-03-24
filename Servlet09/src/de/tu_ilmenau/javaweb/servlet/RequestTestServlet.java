@@ -39,6 +39,11 @@ public class RequestTestServlet extends HttpServlet {
         request.getParameterValues(); String[] 根据key获取Map集合的value，这个value是一个数组
          */
 
+        // 获取客户端的IP地址
+        String remoteAddr = request.getRemoteAddr();
+        out.print("用户端的IP地址是：" + remoteAddr);
+        // 用户端的IP地址是：0:0:0:0:0:0:0:1 用localhost访问
+//        用户端的IP地址是：127.0.0.1 用127.0.0.1访问
     }
 
     @Override
@@ -48,6 +53,8 @@ public class RequestTestServlet extends HttpServlet {
         // username=zhangsan&password=123&hobby=sing&hobby=dance&hobby=rap
         // 以上的数据会被Tomcat封装到request对象当中
 
+        // 设定请求体当中的字符编码, Tomcat10以后会自动帮忙处理，不会出现乱码了
+//        request.setCharacterEncoding("utf8");
         // 获取map集合
         Map<String, String[]> parameterMap = request.getParameterMap(); // 获取集合
         // 遍历map集合，获取所有的key，遍历
