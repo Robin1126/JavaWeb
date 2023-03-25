@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -16,8 +17,17 @@ import java.util.Date;
 public class AServletTime extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         Date nowTime = new Date();
-        request.setAttribute("nowTime",nowTime);
+        // URI 项目名/save?username=zhangsan&password=123 可以在浏览器直接发送get请求
+        // URIEncoding = UTF-8
+
+        // 使用SimpleDateFormat来自定义时间格式
+        // 然后使用sdf.format格式将时间对象转换成字符串，方便输出
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String time = sdf.format(nowTime);
+        request.setAttribute("nowTime",time);
+
      /*   Object obj = request.getAttribute("nowTime");
 
         response.setContentType("text/html");
@@ -31,6 +41,7 @@ public class AServletTime extends HttpServlet {
         // 1. 获取请求转换器对象
         // 里面传的是一个路径,我们不用直接new，转发给B
         RequestDispatcher dispatcher = request.getRequestDispatcher("/b");
+        dispatcher.forward(request,response);
 
         // 2.调用转发器的方法forward,完成转发
         // 将request,response传入到BServlet当中，保证传递的是一致的
