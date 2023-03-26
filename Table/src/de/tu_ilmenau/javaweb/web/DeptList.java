@@ -35,6 +35,15 @@ public class DeptList extends HttpServlet {
         out.print("		<title>部门列表页面</title>   ");
         out.print("	</head>   ");
         out.print("	<body>   ");
+
+        out.print("    	<script type='text/javascript'>");
+        out.print("            function del(dno) {  ");
+        out.print("        if(window.confirm('确认删除？')) {    ");
+        out.print("            document.location.href = '" + contextPath + "/dept/delete?deptno=' + dno;   ");
+        out.print("        }   ");
+        out.print("    }        ");
+        out.print("</script>      ");
+
         out.print("		<h1 align='center'>部门列表</h1>   ");
         out.print("		<hr>  ");
         out.print("		<table border='1px' align='center' width='50%'>   ");
@@ -47,7 +56,6 @@ public class DeptList extends HttpServlet {
         out.print("			</tr>   ");
 
         // 上面死的一部分
-
 
 
         // 连接数据库查询 JDBC
@@ -66,15 +74,15 @@ public class DeptList extends HttpServlet {
                 String loc = rs.getString("loc");
 
                 out.print("			<tr align='center'>   ");
-                out.print("				<td>"+ (++i) + "</td>   ");
-                out.print("				<td>"+ deptno + "</td>    ");
-                out.print("				<td>"+ dname + "</td>   ");
-                out.print("				<td>"+ loc + "</td>   ");
+                out.print("				<td>" + (++i) + "</td>   ");
+                out.print("				<td>" + deptno + "</td>    ");
+                out.print("				<td>" + dname + "</td>   ");
+                out.print("				<td>" + loc + "</td>   ");
                 out.print("				<td>      ");
-                out.print("					<a href='javascript:void(0)'>删除</a>  ");
+                out.print("					<a href='javascript:void(0)' onclick='del(" + deptno + ")'>删除</a>");
                 out.print("					<a href='edit.html'>修改</a>   ");
                 // 点超链接的时候相当于发送了请求，这个格式不是随便写的，都是uri?属性=属性值&属性=属性值
-                out.print("					<a href='" + contextPath + "/dept/detail?deptno="+ deptno +"'>详情</a>");
+                out.print("					<a href='" + contextPath + "/dept/detail?deptno=" + deptno + "'>详情</a>");
                 out.print("				</td>   ");
                 out.print("			</tr>  ");
             }

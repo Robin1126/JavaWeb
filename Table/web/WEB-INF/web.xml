@@ -20,4 +20,13 @@
         <servlet-name>detail</servlet-name>
         <url-pattern>/dept/detail</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>delete</servlet-name>
+        <servlet-class>de.tu_ilmenau.javaweb.web.DeptDelete</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>delete</servlet-name>
+        <url-pattern>/dept/delete</url-pattern>
+    </servlet-mapping>
 </web-app>
