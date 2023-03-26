@@ -15,10 +15,16 @@ import java.sql.*;
  * Date : 26.03.2023
  */
 public class DeptList extends HttpServlet {
+
+
     // 重写doGet方法
+
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // 获取应用的根路径
+        String contextPath = request.getContextPath();
+
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
 
@@ -67,7 +73,8 @@ public class DeptList extends HttpServlet {
                 out.print("				<td>      ");
                 out.print("					<a href='javascript:void(0)'>删除</a>  ");
                 out.print("					<a href='edit.html'>修改</a>   ");
-                out.print("					<a href='detail.html'>详情</a>   ");
+                // 点超链接的时候相当于发送了请求，这个格式不是随便写的，都是uri?属性=属性值&属性=属性值
+                out.print("					<a href='" + contextPath + "/dept/detail?deptno="+ deptno +"'>详情</a>");
                 out.print("				</td>   ");
                 out.print("			</tr>  ");
             }

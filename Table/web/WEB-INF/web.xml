@@ -11,4 +11,13 @@
         <servlet-name>list</servlet-name>
         <url-pattern>/dept/list</url-pattern> <!--不需要加项目名-->
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>detail</servlet-name>
+        <servlet-class>de.tu_ilmenau.javaweb.web.DeptDetail</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>detail</servlet-name>
+        <url-pattern>/dept/detail</url-pattern>
+    </servlet-mapping>
 </web-app>
