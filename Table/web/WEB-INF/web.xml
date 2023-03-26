@@ -3,4 +3,12 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
          version="6.0">
+    <servlet>
+        <servlet-name>list</servlet-name>
+        <servlet-class>de.tu_ilmenau.javaweb.web.DeptList</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>list</servlet-name>
+        <url-pattern>/dept/list</url-pattern> <!--不需要加项目名-->
+    </servlet-mapping>
 </web-app>
