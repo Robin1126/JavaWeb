@@ -15,7 +15,11 @@ import java.sql.*;
  * Date : 26.03.2023
  */
 public class DeptList extends HttpServlet {
-
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // 在doPost请求处理中调用doGet可以避免405错误，前端请求的方法和后端处理的不一致
+        doGet(request, response);
+    }
 
     // 重写doGet方法
 
@@ -95,7 +99,7 @@ public class DeptList extends HttpServlet {
         // 下面死的一部分
         out.print("		</table>     ");
         out.print("		<hr>    ");
-        out.print("		<a href='add.html'>新增部门</a>   ");
+        out.print("		<a href='" + contextPath + "/add.html'>新增部门</a>   "); // 带有项目名的href
         out.print("	</body>   ");
         out.print("</html>   ");
     }

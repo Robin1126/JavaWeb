@@ -29,4 +29,13 @@
         <servlet-name>delete</servlet-name>
         <url-pattern>/dept/delete</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>add</servlet-name>
+        <servlet-class>de.tu_ilmenau.javaweb.web.DeptAdd</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>add</servlet-name>
+        <url-pattern>/dept/save</url-pattern>
+    </servlet-mapping>
 </web-app>
