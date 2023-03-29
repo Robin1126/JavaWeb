@@ -54,9 +54,11 @@ public class DeptDelete extends HttpServlet {
         }
         if (count == 1) {
             // 删除成功以后，又要跳转回去列表页面
-            request.getRequestDispatcher("/dept/list").forward(request,response);
+//            request.getRequestDispatcher("/dept/list").forward(request,response);
+            response.sendRedirect(request.getContextPath() + "/dept/list");
         } else {
-            request.getRequestDispatcher("/error.html").forward(request,response);
+//            request.getRequestDispatcher("/error.html").forward(request,response);
+            response.sendRedirect(request.getContextPath() + "/error.html");
         }
     }
 }
