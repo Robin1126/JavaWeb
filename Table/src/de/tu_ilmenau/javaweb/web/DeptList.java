@@ -84,7 +84,7 @@ public class DeptList extends HttpServlet {
                 out.print("				<td>" + loc + "</td>   ");
                 out.print("				<td>      ");
                 out.print("					<a href='javascript:void(0)' onclick='del(" + deptno + ")'>删除</a>");
-                out.print("					<a href='edit.html'>修改</a>   ");
+                out.print("					<a href='/table/dept/edit?deptno=" + deptno + "'>修改</a>   ");
                 // 点超链接的时候相当于发送了请求，这个格式不是随便写的，都是uri?属性=属性值&属性=属性值
                 out.print("					<a href='" + contextPath + "/dept/detail?deptno=" + deptno + "'>详情</a>");
                 out.print("				</td>   ");

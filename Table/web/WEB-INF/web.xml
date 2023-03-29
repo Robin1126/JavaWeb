@@ -4,6 +4,15 @@
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
          version="6.0">
     <servlet>
+        <servlet-name>update</servlet-name>
+        <servlet-class>de.tu_ilmenau.javaweb.web.DeptUpdate</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>update</servlet-name>
+        <url-pattern>/dept/update</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>list</servlet-name>
         <servlet-class>de.tu_ilmenau.javaweb.web.DeptList</servlet-class>
     </servlet>
@@ -37,5 +46,14 @@
     <servlet-mapping>
         <servlet-name>add</servlet-name>
         <url-pattern>/dept/save</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>edit</servlet-name>
+        <servlet-class>de.tu_ilmenau.javaweb.web.DeptEdit</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>edit</servlet-name>
+        <url-pattern>/dept/edit</url-pattern>
     </servlet-mapping>
 </web-app>
