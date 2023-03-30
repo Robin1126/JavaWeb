@@ -26,7 +26,7 @@ public class DeptServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String servletPath = request.getServletPath();
+        String servletPath = request.getServletPath(); // 这个是整个的路径
         if ("/dept/list".equals(servletPath)) {
             doList(request, response);
         } else if ("/dept/save".equals(servletPath)) {
@@ -90,7 +90,7 @@ public class DeptServlet extends HttpServlet {
     private void doEdit(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        String contextPath = request.getContextPath();
+        String contextPath = request.getContextPath(); // 这个是根路径
 
         // 处理修改页面过来的请求
         String deptno = request.getParameter("deptno");
