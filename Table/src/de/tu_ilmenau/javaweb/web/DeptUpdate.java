@@ -41,9 +41,11 @@ public class DeptUpdate extends HttpServlet {
         }
         if (count == 1) {
             // 更新成功，返回list页面
-            request.getRequestDispatcher("/dept/list").forward(request,response);
+//            request.getRequestDispatcher("/dept/list").forward(request,response);
+            response.sendRedirect("/table/dept/list");
         }else {
-            request.getRequestDispatcher("/error.html").forward(request,response);
+//            request.getRequestDispatcher("/error.html").forward(request,response);
+            response.sendRedirect("/table/error.html");
         }
 
     }

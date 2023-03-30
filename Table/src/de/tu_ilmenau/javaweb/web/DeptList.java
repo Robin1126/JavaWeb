@@ -68,7 +68,7 @@ public class DeptList extends HttpServlet {
         ResultSet rs = null;
         try {
             conn = DButils.getConnection();
-            String sql = "select deptno, dname, loc from t_dept";
+            String sql = "select deptno, dname, loc from t_dept order by deptno";
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
             int i = 0;
