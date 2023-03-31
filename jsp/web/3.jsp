@@ -12,5 +12,11 @@
   String name = "jack";
   System.out.println("name = " + name);
   // service方法里面有out
-  out.write("name = " + name);
+//  out.write("name = " + name);
+  // %=会被翻译称为out.print(),注意不能添加分号
+  // 有变量再这么写，没有的话直接在jsp中写
 %>
+<br>
+<%= "bubu and yier"%>
+<br>
+<%= "name = " + name %>
