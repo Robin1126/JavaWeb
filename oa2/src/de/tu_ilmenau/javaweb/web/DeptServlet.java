@@ -22,8 +22,8 @@ import java.util.List;
  * Date : 30.03.2023
  */
 // 模板类 也可以写成"/dept/*"表示模糊匹配
-    // 可以将详情和修改写在一个servlet里面，只不过加一个flag，最后跳转到页面不同
-@WebServlet({"/dept/list", "/dept/edit", "/dept/add", "/dept/delete", "/dept/detail"})
+// 可以将详情和修改写在一个servlet里面，只不过加一个flag，最后跳转到页面不同
+@WebServlet({"/dept/list", "/dept/edit", "/dept/add", "/dept/delete", "/dept/detail", "/dept/login"})
 public class DeptServlet extends HttpServlet {
     // 模板方法
     // 重写service方法
@@ -41,11 +41,47 @@ public class DeptServlet extends HttpServlet {
             doEdit(request, response);
         } else if ("/dept/delete".equals(servletPath)) {
             doDel(request, response);
-        }/* else if ("/dept/update".equals(servletPath)) {
-            doUpdate(request,response);
-        }*/
+        } else if ("/dept/login".equals(servletPath)) {
+            doLogin(request, response);
+        }
 
 
+    }
+
+    private void doLogin(HttpServletRequest request, HttpServletResponse response)
+            throws IOException, ServletException {
+        request.setCharacterEncoding("UTF-8");
+        String name = request.getParameter("name");
+        String pwd = request.getParameter("pwd");
+        boolean success = false;
+
+
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            conn = DButils.getConnection();
+            String sql = "select id from t_user where name = ? and password = ?";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, name);
+            ps.setString(2, pwd);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                success = true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DButils.close(conn, ps, rs);
+        }
+
+        if (success) {
+            // 成功
+            request.getRequestDispatcher("/dept/list").forward(request,response);
+        } else {
+            // 失败
+            response.sendRedirect(request.getContextPath()+"/loginfail.jsp");
+        }
     }
 
     /*private void doUpdate(HttpServletRequest request, HttpServletResponse response)
@@ -129,7 +165,6 @@ public class DeptServlet extends HttpServlet {
     }
 
 
-
     private void doEdit(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String deptno = request.getParameter("deptno");
         String dname = request.getParameter("dname");
@@ -154,10 +189,10 @@ public class DeptServlet extends HttpServlet {
         if (count == 1) {
             // 更新成功，返回list页面
 //            request.getRequestDispatcher("/dept/list").forward(request,response);
-            response.sendRedirect(request.getContextPath()+"/dept/list");
+            response.sendRedirect(request.getContextPath() + "/dept/list");
         } else {
 //            request.getRequestDispatcher("/error.jsp").forward(request,response);
-            response.sendRedirect(request.getContextPath()+"/error.jsp");
+            response.sendRedirect(request.getContextPath() + "/error.jsp");
         }
     }
 
@@ -183,12 +218,12 @@ public class DeptServlet extends HttpServlet {
                 dept.setDeptno(deptno);
                 dept.setDname(rs.getString("dname"));
                 dept.setLoc(rs.getString("loc"));
-                request.setAttribute("dept",dept);
+                request.setAttribute("dept", dept);
                 String flag = request.getParameter("f");
                 if ("m".equals(flag)) {
-                    request.getRequestDispatcher("/edit.jsp").forward(request,response);
+                    request.getRequestDispatcher("/edit.jsp").forward(request, response);
                 } else if ("d".equals(flag)) {
-                    request.getRequestDispatcher("/detail.jsp").forward(request,response);
+                    request.getRequestDispatcher("/detail.jsp").forward(request, response);
                 }
             } else {
                 // 没查到，跳转到error页面
@@ -265,8 +300,8 @@ public class DeptServlet extends HttpServlet {
                 depts.add(dept);
             }
             // 将这个容器放到request域中转发
-            request.setAttribute("depts",depts);
-            request.getRequestDispatcher("/list.jsp").forward(request,response);
+            request.setAttribute("depts", depts);
+            request.getRequestDispatcher("/list.jsp").forward(request, response);
 
         } catch (SQLException e) {
             e.printStackTrace();
