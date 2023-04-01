@@ -22,7 +22,8 @@ import java.util.List;
  * Date : 30.03.2023
  */
 // 模板类 也可以写成"/dept/*"表示模糊匹配
-@WebServlet({"/dept/list", "/dept/update", "/dept/edit", "/dept/add", "/dept/delete", "/dept/detail"})
+    // 可以将详情和修改写在一个servlet里面，只不过加一个flag，最后跳转到页面不同
+@WebServlet({"/dept/list", "/dept/edit", "/dept/add", "/dept/delete", "/dept/detail"})
 public class DeptServlet extends HttpServlet {
     // 模板方法
     // 重写service方法
@@ -40,14 +41,14 @@ public class DeptServlet extends HttpServlet {
             doEdit(request, response);
         } else if ("/dept/delete".equals(servletPath)) {
             doDel(request, response);
-        } else if ("/dept/update".equals(servletPath)) {
+        }/* else if ("/dept/update".equals(servletPath)) {
             doUpdate(request,response);
-        }
+        }*/
 
 
     }
 
-    private void doUpdate(HttpServletRequest request, HttpServletResponse response)
+    /*private void doUpdate(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // 通过deptno查出对应的数据
         Dept dept = new Dept();
@@ -80,7 +81,7 @@ public class DeptServlet extends HttpServlet {
         }
 
 
-    }
+    }*/
 
     private void doDel(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String deptno = request.getParameter("deptno");
@@ -183,7 +184,12 @@ public class DeptServlet extends HttpServlet {
                 dept.setDname(rs.getString("dname"));
                 dept.setLoc(rs.getString("loc"));
                 request.setAttribute("dept",dept);
-                request.getRequestDispatcher("/detail.jsp").forward(request,response);
+                String flag = request.getParameter("f");
+                if ("m".equals(flag)) {
+                    request.getRequestDispatcher("/edit.jsp").forward(request,response);
+                } else if ("d".equals(flag)) {
+                    request.getRequestDispatcher("/detail.jsp").forward(request,response);
+                }
             } else {
                 // 没查到，跳转到error页面
                 response.sendRedirect(request.getContextPath() + "/error.jsp");

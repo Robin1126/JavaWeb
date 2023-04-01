@@ -44,8 +44,8 @@
 				<td><%=dept.getLoc()%></td>
 				<td>
 					<a href="javascript:void(0)" onclick="del(<%=dept.getDeptno()%>)">删除</a>
-					<a href="<%=request.getContextPath()%>/dept/update?deptno=<%= dept.getDeptno()%>">修改</a>
-					<a href="<%=request.getContextPath() %>/dept/detail?deptno=<%= dept.getDeptno()%>">详情</a>
+					<a href="<%=request.getContextPath()%>/dept/detail?f=m&deptno=<%= dept.getDeptno()%>">修改</a>
+					<a href="<%=request.getContextPath() %>/dept/detail?f=d&deptno=<%= dept.getDeptno()%>">详情</a>
 				</td>
 			</tr>
 		<% } %>
