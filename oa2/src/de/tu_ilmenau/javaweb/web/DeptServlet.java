@@ -7,6 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -23,31 +24,39 @@ import java.util.List;
  */
 // 模板类 也可以写成"/dept/*"表示模糊匹配
 // 可以将详情和修改写在一个servlet里面，只不过加一个flag，最后跳转到页面不同
-@WebServlet({"/dept/list", "/dept/edit", "/dept/add", "/dept/delete", "/dept/detail", "/dept/login"})
+@WebServlet({"/dept/list", "/dept/edit", "/dept/add", "/dept/delete", "/dept/detail"})
 public class DeptServlet extends HttpServlet {
     // 模板方法
     // 重写service方法
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String servletPath = request.getServletPath(); // 这个是整个的路径
-        if ("/dept/list".equals(servletPath)) {
-            doList(request, response);
-        } else if ("/dept/add".equals(servletPath)) {
-            doAdd(request, response);
-        } else if ("/dept/detail".equals(servletPath)) {
-            doDetail(request, response);
-        } else if ("/dept/edit".equals(servletPath)) {
-            doEdit(request, response);
-        } else if ("/dept/delete".equals(servletPath)) {
-            doDel(request, response);
-        } else if ("/dept/login".equals(servletPath)) {
-            doLogin(request, response);
+        // 访问jsp的时候，会自动生成一个session对象，因此判断的时候要加入一个session.getAttribute("name") != null
+        // 或者在jsp文件中设定不自动生成session
+        HttpSession session = request.getSession(false);
+        if (session != null && session.getAttribute("name") != null) {
+            // 已经登录成功
+            String servletPath = request.getServletPath(); // 这个是整个的路径
+            if ("/dept/list".equals(servletPath)) {
+                doList(request, response);
+            } else if ("/dept/add".equals(servletPath)) {
+                doAdd(request, response);
+            } else if ("/dept/detail".equals(servletPath)) {
+                doDetail(request, response);
+            } else if ("/dept/edit".equals(servletPath)) {
+                doEdit(request, response);
+            } else if ("/dept/delete".equals(servletPath)) {
+                doDel(request, response);
+            }
+        } else {
+            // 跳转到登录页面
+            // 访问根，自动跳转到index页面
+            response.sendRedirect(request.getContextPath());
         }
-
 
     }
 
+/*
     private void doLogin(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
         request.setCharacterEncoding("UTF-8");
@@ -76,6 +85,10 @@ public class DeptServlet extends HttpServlet {
         }
 
         if (success) {
+            // 获取session对象
+            // 没有就新建
+            HttpSession session = request.getSession();
+            session.setAttribute("name",name);
             // 成功
             request.getRequestDispatcher("/dept/list").forward(request,response);
         } else {
@@ -83,6 +96,7 @@ public class DeptServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath()+"/loginfail.jsp");
         }
     }
+*/
 
     /*private void doUpdate(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
