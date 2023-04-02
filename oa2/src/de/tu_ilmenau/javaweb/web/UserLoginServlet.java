@@ -18,12 +18,35 @@ import java.sql.SQLException;
  * Author : Binbin Luo
  * Date : 02.04.2023
  */
-@WebServlet("/dept/login")
+@WebServlet({"/dept/login","/dept/exit"})
 public class UserLoginServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
+        String path = request.getServletPath();
+        if ("/dept/login".equals(path)) {
+            doLogin(request,response);
+        } else if ("/dept/exit".equals(path)) {
+            doExit(request,response);
+        }
+
+
+    }
+
+    private void doExit(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        // 获取session对象，销毁session
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            // 手动销毁session
+            session.invalidate();
+            // 销毁后跳转到登录页，首页
+            response.sendRedirect(request.getContextPath());
+        }
+    }
+
+    private void doLogin(HttpServletRequest request, HttpServletResponse response)
+            throws IOException, ServletException {
         String name = request.getParameter("name");
         String pwd = request.getParameter("pwd");
         boolean success = false;

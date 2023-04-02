@@ -11,6 +11,7 @@
 	<body>
 <%--	显示登录名--%>
 <h3>welcome back,<%=session.getAttribute("name")%> !</h3>
+<a href="<%=request.getContextPath()%>/dept/exit">[安全退出]</a>
 	<script type="text/javascript">
 		function del(dno) {
 			if(window.confirm('确认删除？')) {
