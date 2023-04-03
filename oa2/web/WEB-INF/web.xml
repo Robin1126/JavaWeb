@@ -3,4 +3,8 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
          version="6.0">
+    <welcome-file-list>
+        <welcome-file>welcome</welcome-file>
+<!--        welcome配置是自动在根路径下面的，不需要添加/ -->
+    </welcome-file-list>
 </web-app>

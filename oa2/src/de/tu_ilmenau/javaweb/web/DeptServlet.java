@@ -51,7 +51,7 @@ public class DeptServlet extends HttpServlet {
         } else {
             // 跳转到登录页面
             // 访问根，自动跳转到index页面
-            response.sendRedirect(request.getContextPath());
+            response.sendRedirect(request.getContextPath() + "/index.jsp");
         }
 
     }

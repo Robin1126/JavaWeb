@@ -10,22 +10,24 @@
 <%--不自动生成session--%>
 <html>
 <head>
-	<title>登录页面</title>
+    <title>登录页面</title>
 </head>
 <body>
 <h1>请先进行登录</h1>
 <hr>
 
 <form ACTION="<%=request.getContextPath()%>/dept/login" method="post">
-	用户名：<input type="text" name="name"><br>
-	密码：<input type="password" name="pwd"><br>
-	<input type="submit" value="登录" onclick="login()">
-	<input type="reset" value="重置">
-<script type="text/javascript">
-	login = function () {
-		alert("尝试登陆中...请稍后...");
-	}
-</script>
+    用户名：<input type="text" name="name"><br>
+    密码：<input type="password" name="pwd"><br>
+    <input type="checkbox" name="check" value="1">十天内免登录
+    <input type="submit" value="登录" onclick="login()">
+    <input type="reset" value="重置">
+
+    <script type="text/javascript">
+        login = function () {
+            alert("尝试登陆中...请稍后...");
+        }
+    </script>
 
 </form>
 

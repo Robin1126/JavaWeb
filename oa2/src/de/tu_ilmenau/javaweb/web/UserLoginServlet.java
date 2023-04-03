@@ -3,10 +3,7 @@ package de.tu_ilmenau.javaweb.web;
 import de.tu_ilmenau.javaweb.jdbc.DButils;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.*;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -35,14 +32,30 @@ public class UserLoginServlet extends HttpServlet {
     }
 
     private void doExit(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        // 销毁cookie？
+        // 删除cookie要将对应的值设置为null，MaxAge设置成0，马上销毁，然后路径还要设置成项目的根路径
+        Cookie[] cookies = request.getCookies();
+        for (Cookie cookie : cookies) {
+            if ("username".equals(cookie.getName())) {
+                cookie = new Cookie("username",null);
+            }
+            if ("password".equals(cookie.getName())) {
+                cookie = new Cookie("password",null);
+            }
+            cookie.setMaxAge(0);
+            cookie.setPath(request.getContextPath());
+            response.addCookie(cookie);
+        }
+
         // 获取session对象，销毁session
         HttpSession session = request.getSession(false);
         if (session != null) {
             // 手动销毁session
             session.invalidate();
-            // 销毁后跳转到登录页，首页
-            response.sendRedirect(request.getContextPath());
         }
+        // 销毁后跳转到登录页，首页
+        response.sendRedirect(request.getContextPath() + "/index.jsp");
     }
 
     private void doLogin(HttpServletRequest request, HttpServletResponse response)
@@ -74,10 +87,30 @@ public class UserLoginServlet extends HttpServlet {
         if (success) {
             // 获取session对象
             // 没有就新建
+            // 登录成功的时候，就新建一个cookie
             HttpSession session = request.getSession();
             session.setAttribute("name", name);
-            // 成功
-            request.getRequestDispatcher("/dept/list").forward(request, response);
+
+            String check = request.getParameter("check");
+            if("1".equals(check)) {
+                Cookie cookie1 = new Cookie("username", name);
+                Cookie cookie2 = new Cookie("password", pwd);
+
+                // 设置cookie有效时间
+                cookie1.setMaxAge(60 * 60 * 24 * 10);
+                cookie2.setMaxAge(60 * 60 * 24 * 10);
+
+                // 设置cookie路径
+                cookie1.setPath(request.getContextPath());
+                cookie2.setPath(request.getContextPath());
+
+                // 设置响应cookie给浏览器
+                response.addCookie(cookie1);
+                response.addCookie(cookie2);
+            }
+            // 成功,跳转到用户界面
+            response.sendRedirect(request.getContextPath() + "/dept/list");
+
         } else {
             // 失败
             response.sendRedirect(request.getContextPath() + "/loginfail.jsp");
