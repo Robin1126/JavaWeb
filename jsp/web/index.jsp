@@ -14,7 +14,7 @@
   <body>
   <input type="button" value="click me !" onclick="alert('hello!JSP!')">
   <br>
-  <a href="/jsp/Ignore_EL.jsp" >跳转页面</a>
+  <a href="/jsp/EL_pageContext.jsp" >跳转页面</a>
   <br>
   </body>
 </html>
