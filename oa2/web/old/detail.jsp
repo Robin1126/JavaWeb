@@ -7,15 +7,14 @@
 		<title>部门详情</title>
 	</head>
 	<body>
-	<%--<%
+	<%
 		Dept dept = (Dept) request.getAttribute("dept");
-	%>--%>
-	<h3>欢迎${name}</h3>
+	%>
 		<h1>部门详情</h1>
 		<hr>
-		部门编号：${dept.deptno}<br>
-		部门名称：${dept.dname}<br>
-		部门位置：${dept.loc}<br>
+		部门编号：<%=dept.getDeptno()%><br>
+		部门名称：<%=dept.getDname()%><br>
+		部门位置：<%=dept.getLoc()%><br>
 		
 		<input type="button" value="返回列表页面" onclick="window.history.back()"/>
 	</body>

@@ -34,7 +34,8 @@ public class UserLoginServlet extends HttpServlet {
     private void doExit(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         // 销毁cookie？
-        // 删除cookie要将对应的值设置为null，MaxAge设置成0，马上销毁，然后路径还要设置成项目的根路径
+        // 删除cookie要将对应的值设置为null，MaxAge设置成0，马上销毁，然后路径还要设置成项目的根路径进行覆盖
+        // 因为子路径的cookie不能删除父路径上的cookie，路径必须一模一样
         Cookie[] cookies = request.getCookies();
         for (Cookie cookie : cookies) {
             if ("username".equals(cookie.getName())) {
@@ -44,6 +45,7 @@ public class UserLoginServlet extends HttpServlet {
                 cookie = new Cookie("password",null);
             }
             cookie.setMaxAge(0);
+            // 覆盖原来的cookie路径
             cookie.setPath(request.getContextPath());
             response.addCookie(cookie);
         }

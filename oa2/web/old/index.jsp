@@ -16,7 +16,7 @@
 <h1>请先进行登录</h1>
 <hr>
 
-<form ACTION="${pageContext.request.contextPath}/dept/login" method="post">
+<form ACTION="<%=request.getContextPath()%>/dept/login" method="post">
     用户名：<input type="text" name="name"><br>
     密码：<input type="password" name="pwd"><br>
     <input type="checkbox" name="check" value="1">十天内免登录
