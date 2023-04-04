@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/JSTL/JSTL.iml" filepath="$PROJECT_DIR$/JSTL/JSTL.iml" />
       <module fileurl="file://$PROJECT_DIR$/JavaWeb.iml" filepath="$PROJECT_DIR$/JavaWeb.iml" />
       <module fileurl="file://$PROJECT_DIR$/Servlet06/Servlet06.iml" filepath="$PROJECT_DIR$/Servlet06/Servlet06.iml" />
       <module fileurl="file://$PROJECT_DIR$/Servlet07/Servlet07.iml" filepath="$PROJECT_DIR$/Servlet07/Servlet07.iml" />
