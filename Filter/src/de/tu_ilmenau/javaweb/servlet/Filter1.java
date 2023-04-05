@@ -1,7 +1,6 @@
 package de.tu_ilmenau.javaweb.servlet;
 
 import jakarta.servlet.*;
-import jakarta.servlet.annotation.WebFilter;
 
 import java.io.IOException;
 
@@ -15,7 +14,7 @@ import java.io.IOException;
  * /* 匹配所有的路径
  */
 // 注意这里的注释是WebFilter！！！不是WebServlet
-@WebFilter("*.do")
+//@WebFilter("*.do")
 public class Filter1 implements Filter {
     public Filter1() {
         System.out.println("无参数构造方法执行");
@@ -31,7 +30,7 @@ public class Filter1 implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
         // doFilter方法在用户发送请求的时候执行一次，发送N次请求，就执行N次请求，并且在这个方法当中编写过滤规则
-        System.out.println("doFilter方法执行");
+        System.out.println("Filter1 doFilter方法执行");
 
         // 这段代码的是让你执行下一个过滤器，如果没有过滤器就执行Servlet
         chain.doFilter(request,response);

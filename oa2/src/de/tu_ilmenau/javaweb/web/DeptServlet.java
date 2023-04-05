@@ -7,7 +7,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -30,10 +29,11 @@ public class DeptServlet extends HttpServlet {
     // 重写service方法
 
     @Override
-    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void service(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         // 访问jsp的时候，会自动生成一个session对象，因此判断的时候要加入一个session.getAttribute("name") != null
         // 或者在jsp文件中设定不自动生成session
-        HttpSession session = request.getSession(false);
+      /*  HttpSession session = request.getSession(false);
         if (session != null && session.getAttribute("name") != null) {
             // 已经登录成功
             String servletPath = request.getServletPath(); // 这个是整个的路径
@@ -50,8 +50,20 @@ public class DeptServlet extends HttpServlet {
             }
         } else {
             // 跳转到登录页面
-            // 访问根，自动跳转到index页面
-            response.sendRedirect(request.getContextPath() + "/index.jsp");
+            // 访问根，自动跳转到index页面*/
+      /*      response.sendRedirect(request.getContextPath() + "/index.jsp");
+        }*/
+        String servletPath = request.getServletPath(); // 这个是整个的路径
+        if ("/dept/list".equals(servletPath)) {
+            doList(request, response);
+        } else if ("/dept/add".equals(servletPath)) {
+            doAdd(request, response);
+        } else if ("/dept/detail".equals(servletPath)) {
+            doDetail(request, response);
+        } else if ("/dept/edit".equals(servletPath)) {
+            doEdit(request, response);
+        } else if ("/dept/delete".equals(servletPath)) {
+            doDel(request, response);
         }
 
     }

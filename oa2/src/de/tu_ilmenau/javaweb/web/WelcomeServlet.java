@@ -15,6 +15,8 @@ import java.sql.SQLException;
  * Author : Binbin Luo
  * Date : 03.04.2023
  */
+
+// 上来就执行这一个servlet，用来验证cookie的，如果没有cookie或者cookie无效，就会跳转到index.jsp页面
 @WebServlet("/welcome")
 public class WelcomeServlet extends HttpServlet {
     @Override
@@ -50,8 +52,8 @@ public class WelcomeServlet extends HttpServlet {
                 conn = DButils.getConnection();
                 String sql = "select * from t_user where name = ? and password = ?";
                 ps = conn.prepareStatement(sql);
-                ps.setString(1,username);
-                ps.setString(2,password);
+                ps.setString(1, username);
+                ps.setString(2, password);
                 rs = ps.executeQuery();
                 if (rs.next()) {
                     flag = true;
@@ -60,14 +62,14 @@ public class WelcomeServlet extends HttpServlet {
             } catch (SQLException e) {
                 e.printStackTrace();
             } finally {
-                DButils.close(conn,ps,rs);
+                DButils.close(conn, ps, rs);
             }
 
             if (flag) {
                 // 登录成功
                 // 获取session
                 HttpSession session = request.getSession();
-                session.setAttribute("name",username);
+                session.setAttribute("name", username);
                 // 重定向到list
                 response.sendRedirect(request.getContextPath() + "/dept/list");
             } else {

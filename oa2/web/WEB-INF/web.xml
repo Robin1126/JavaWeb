@@ -7,4 +7,13 @@
         <welcome-file>welcome</welcome-file>
 <!--        welcome配置是自动在根路径下面的，不需要添加/ -->
     </welcome-file-list>
+
+    <filter>
+        <filter-name>Filter</filter-name>
+        <filter-class>de.tu_ilmenau.javaweb.bean.Filter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>Filter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 </web-app>
