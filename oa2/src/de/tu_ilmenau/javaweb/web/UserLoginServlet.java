@@ -1,5 +1,6 @@
 package de.tu_ilmenau.javaweb.web;
 
+import de.tu_ilmenau.javaweb.bean.User;
 import de.tu_ilmenau.javaweb.jdbc.DButils;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -17,6 +18,7 @@ import java.sql.SQLException;
  */
 @WebServlet({"/dept/login","/dept/exit"})
 public class UserLoginServlet extends HttpServlet {
+
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -53,8 +55,11 @@ public class UserLoginServlet extends HttpServlet {
         // 获取session对象，销毁session
         HttpSession session = request.getSession(false);
         if (session != null) {
+            // 从session域当中删除user对象
+            session.removeAttribute("user");
             // 手动销毁session
             session.invalidate();
+
         }
         // 销毁后跳转到登录页，首页
         response.sendRedirect(request.getContextPath() + "/index.jsp");
@@ -91,7 +96,9 @@ public class UserLoginServlet extends HttpServlet {
             // 没有就新建
             // 登录成功的时候，就新建一个cookie
             HttpSession session = request.getSession();
-            session.setAttribute("name", name);
+            //session.setAttribute("name", name);
+            User user = new User(name,pwd);
+            session.setAttribute("user",user);
 
             String check = request.getParameter("check");
             if("1".equals(check)) {

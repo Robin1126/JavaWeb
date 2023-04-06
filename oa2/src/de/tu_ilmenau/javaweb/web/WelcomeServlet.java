@@ -1,5 +1,6 @@
 package de.tu_ilmenau.javaweb.web;
 
+import de.tu_ilmenau.javaweb.bean.User;
 import de.tu_ilmenau.javaweb.jdbc.DButils;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -69,7 +70,11 @@ public class WelcomeServlet extends HttpServlet {
                 // 登录成功
                 // 获取session
                 HttpSession session = request.getSession();
-                session.setAttribute("name", username);
+//                session.setAttribute("name", username);
+                User user = new User(username,password);
+                session.setAttribute("user",user);
+
+
                 // 重定向到list
                 response.sendRedirect(request.getContextPath() + "/dept/list");
             } else {

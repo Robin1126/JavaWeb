@@ -35,7 +35,7 @@ public class Filter implements jakarta.servlet.Filter {
         String servletPath = request.getServletPath();
 
         if ("/index.jsp".equals(servletPath) || "/welcome".equals(servletPath) || "/dept/login".equals(servletPath)
-        || "/dept/exit".equals(servletPath)  ||  (session != null && session.getAttribute("name") != null)) {
+        || "/dept/exit".equals(servletPath)  ||  (session != null && session.getAttribute("user") != null)) {
             // 已经登录成功,放行
          chain.doFilter(request,response);
         } else {

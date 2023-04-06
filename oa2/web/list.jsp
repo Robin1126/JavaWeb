@@ -18,7 +18,7 @@
 	</head>
 	<body>
 <%--	显示登录名--%>
-<h3>welcome back,${name} !</h3>
+<h3>welcome back, ${user.username} !</h3>
 <a href="dept/exit">[安全退出]</a>
 	<script type="text/javascript">
 		function del(dno) {
@@ -78,5 +78,6 @@
 		</table>
 		<hr>
 		<a href="add.jsp">新增部门</a>
+		<h3>当前在线人数：${pageContext.servletContext.getAttribute("onlinecount")}</h3>
 	</body>
 </html>
